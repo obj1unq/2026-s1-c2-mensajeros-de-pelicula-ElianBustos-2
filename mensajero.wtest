@@ -1,0 +1,43 @@
+import paquete.*
+import destino.*
+import persona.*
+
+
+
+describe "mensajero de gorge" {
+    test "El paquete de George que no está pago no puede ser llevado por Neo a la matrix." {
+        paquete.fuePagodo(false)
+        assert.equals(false, paquete.estaPagado())
+        assert.equals(false, paquete.sePuedeEntregar(neo, laMatrix))
+    }
+//------------------------------------------------------------
+    test " El paquete de George que sí está pago puede ser llevado por Jean a la matrix. "{
+        
+        paquete.fuePagodo(true)
+        assert.equals(true, paquete.estaPagado())
+        assert.equals(true, paquete.sePuedeEntregar(jeanGrey, laMatrix))
+    }
+        //------------------------------------------------------------------
+    test "El paquete de George que sí está pago no puede ser llevado por Sara (que pesa 70kg) a Brooklyn si es que utiliza un camión con un acoplado ."{
+        paquete.fuePagodo(true)
+        assert.equals(true, paquete.estaPagado())   
+        saraConnor.pesoCambiado(70)
+        assert.equals(70, saraConnor.pesoAlMomento())
+        saraConnor.cambioVehiculo(camion)
+        assert.equals(camion, saraConnor.vehiculo())
+        camion.acoplarAlCamion()
+        assert.equals(1, camion.cuantosAcoplados())
+        assert.equals(false, paquete.sePuedeEntregar(saraConnor, puenteBrooklyn))
+    }
+        //-----------------------------------------------------------------------------
+    test " La entrega anterior puede hacerse si Sara usa una moto"{
+        paquete.fuePagodo(true)
+        assert.equals(true, paquete.estaPagado())   
+        saraConnor.pesoCambiado(70)
+        assert.equals(70, saraConnor.pesoAlMomento())
+        saraConnor.cambioVehiculo(moto)
+        assert.equals(true, paquete.sePuedeEntregar(saraConnor, puenteBrooklyn))
+        //---------------------------------------------------------------------------
+        
+    }
+}
